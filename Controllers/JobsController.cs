@@ -55,6 +55,7 @@ namespace jobContractor.Controllers
     {
       try
       {
+        updated.Id = id;
         return Ok(_service.Edit(updated));
       }
       catch (Exception e)

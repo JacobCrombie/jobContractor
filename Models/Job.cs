@@ -8,7 +8,7 @@ namespace jobContractor.Models
     [Required]
     public string Location { get; set; }
     [Required]
-    public int Contact { get; set; }
+    public string Contact { get; set; }
     public string Description { get; set; }
   }
 }
