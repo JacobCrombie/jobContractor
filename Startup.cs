@@ -17,54 +17,56 @@ using MySqlConnector;
 
 namespace jobContractor
 {
-    public class Startup
+  public class Startup
+  {
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-
-            //SCOPED Db
-            services.AddScoped<IDbConnection>(x => CreateDbConnection());
-
-
-            //TRANSIENTS
-            services.AddTransient<ContractorsService>();
-            services.AddTransient<ContractorsRepository>();
-
-
-        }
-        private IDbConnection CreateDbConnection()
-        {
-            var connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
-            return new MySqlConnection(connectionString);
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
+      Configuration = configuration;
     }
+
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+      services.AddControllers();
+
+      //SCOPED Db
+      services.AddScoped<IDbConnection>(x => CreateDbConnection());
+
+
+      //TRANSIENTS
+      services.AddTransient<ContractorsService>();
+      services.AddTransient<ContractorsRepository>();
+      services.AddTransient<JobsService>();
+      services.AddTransient<JobsRepository>();
+
+
+    }
+    private IDbConnection CreateDbConnection()
+    {
+      var connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
+      return new MySqlConnection(connectionString);
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+      if (env.IsDevelopment())
+      {
+        app.UseDeveloperExceptionPage();
+      }
+
+      app.UseHttpsRedirection();
+
+      app.UseRouting();
+
+      app.UseAuthorization();
+
+      app.UseEndpoints(endpoints =>
+      {
+        endpoints.MapControllers();
+      });
+    }
+  }
 }
