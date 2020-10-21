@@ -37,6 +37,7 @@ namespace jobContractor.Services
       var data = Get(updated.Id);
       updated.Location = updated.Location != null ? updated.Location : data.Location;
       updated.Description = updated.Description != null ? updated.Description : data.Description;
+      updated.StartDate = updated.StartDate != null && updated.StartDate != "" ? updated.StartDate : data.StartDate;
       return _repo.Edit(updated);
     }
 

@@ -10,5 +10,11 @@ namespace jobContractor.Models
     [Required]
     public string Contact { get; set; }
     public string Description { get; set; }
+    public string StartDate {get; set;}
+  }
+  public class JobBidViewModel : Job
+  {
+    public int BidId { get; set; }
+    public double BidRate { get; set; }
   }
 }

@@ -19,12 +19,12 @@ namespace jobContractor.Services
 
     internal Contractor Get(int id)
     {
-      var data = _repo.Get(id);
+      Contractor data = _repo.Get(id);
       if (data == null)
       {
         throw new Exception("Invalid Id");
       }
-      return (Contractor)data;
+      return data;
     }
 
     internal Contractor Create(Contractor newContractor)
@@ -35,6 +35,7 @@ namespace jobContractor.Services
     internal object Edit(Contractor updated)
     {
       var data = Get(updated.Id);
+
       updated.Name = updated.Name != null ? updated.Name : data.Name;
       updated.Address = updated.Address != null ? updated.Address : data.Address;
       updated.Skills = updated.Skills != null ? updated.Skills : data.Skills;

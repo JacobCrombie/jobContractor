@@ -20,3 +20,7 @@
 -- INSERT INTO contractors (name, contact, skills, address) VALUES ("Bob the Builder", 5551234, "All Trades included", "The Workshop");
 -- SELECT * FROM jobs;
 -- SELECT * FROM contractors;
+
+
+-- ALTER TABLE jobs
+-- ADD startdate VARCHAR(255) NOT NULL DEFAULT "";
