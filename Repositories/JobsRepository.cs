@@ -19,7 +19,7 @@ namespace jobContractor.Repositories
       return _db.Query<Job>(sql);
     }
 
-    internal object Get(int id)
+    internal Job Get(int id)
     {
       string sql = "SELECT * FROM jobs WHERE id = @id";
       return _db.QueryFirstOrDefault<Job>(sql, new { id });
@@ -39,7 +39,7 @@ namespace jobContractor.Repositories
       return newJob;
     }
 
-    internal object Edit(Job updated)
+    internal Job Edit(Job updated)
     {
       string sql = @"
         UPDATE jobs

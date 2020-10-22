@@ -10,6 +10,7 @@ namespace jobContractor.Controllers
   public class ContractorsController : ControllerBase
   {
     private readonly ContractorsService _service;
+    private readonly 
     public ContractorsController(ContractorsService cs)
     {
       _service = cs;
@@ -21,6 +22,18 @@ namespace jobContractor.Controllers
       try
       {
         return Ok(_service.Get());
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+        [HttpGet("{id}/bids")]
+    public ActionResult<Bid> GetAllByJobId(int id)
+    {
+      try
+      {
+        return Ok(_bidservice.GetAllByJobId(id));
       }
       catch (Exception e)
       {

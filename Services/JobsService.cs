@@ -24,15 +24,15 @@ namespace jobContractor.Services
       {
         throw new Exception("Invalid Id");
       }
-      return (Job)data;
+      return data;
     }
 
-    internal object Create(Job newJob)
+    internal Job Create(Job newJob)
     {
       return _repo.Create(newJob);
     }
 
-    internal object Edit(Job updated)
+    internal Job Edit(Job updated)
     {
       var data = Get(updated.Id);
       updated.Location = updated.Location != null ? updated.Location : data.Location;
@@ -41,7 +41,7 @@ namespace jobContractor.Services
       return _repo.Edit(updated);
     }
 
-    internal object Delete(int id)
+    internal string Delete(int id)
     {
       var data = Get(id);
       _repo.Delete(id);

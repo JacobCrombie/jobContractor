@@ -10,7 +10,7 @@ namespace jobContractor.Controllers
   public class JobsController : ControllerBase
   {
     private readonly JobsService _service;
-    public JobsController(JobsService js)
+    public JobsController(JobsService js, BidsService bs)
     {
       _service = js;
     }
@@ -26,6 +26,7 @@ namespace jobContractor.Controllers
         return BadRequest(e.Message);
       }
     }
+
     [HttpGet("{id}")]
     public ActionResult<Job> Get(int id)
     {
