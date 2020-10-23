@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace jobContractor.Controllers
 {
+  [ApiController]
+  [Route("api/[controller]")]
   public class BidsController : ControllerBase
   {
     private readonly BidsService _service;
@@ -12,19 +14,6 @@ namespace jobContractor.Controllers
     public BidsController(BidsService service)
     {
       _service = service;
-    }
-
-    [HttpGet]
-    public ActionResult<Bid> Get()
-    {
-      try
-      {
-        return Ok(_service.Get());
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
     }
     [HttpGet("{id}")]
     public ActionResult<Bid> Get(int id)
@@ -38,26 +27,12 @@ namespace jobContractor.Controllers
         return BadRequest(e.Message);
       }
     }
-
     [HttpPost]
-    public ActionResult<Bid> Create([FromBody] Bid newRev)
+    public ActionResult<Bid> Create([FromBody] Bid newBid)
     {
       try
       {
-        return Ok(_service.Create(newRev));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
-    [HttpPut("{id}")]
-    public ActionResult<Bid> Edit([FromBody] Bid updatedRev, int id)
-    {
-      try
-      {
-        updatedRev.Id = id;
-        return Ok(_service.Edit(updatedRev));
+        return Ok(_service.Create(newBid));
       }
       catch (Exception e)
       {

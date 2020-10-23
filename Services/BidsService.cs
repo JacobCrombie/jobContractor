@@ -1,33 +1,39 @@
 using System;
+using System.Collections.Generic;
 using jobContractor.Models;
+using jobContractor.Repositories;
 
 namespace jobContractor.Services
 {
   public class BidsService
   {
-    internal object Get()
+    private readonly BidsRepository _repo;
+
+    public BidsService(BidsRepository repo)
     {
-      throw new NotImplementedException();
+      _repo = repo;
+    }
+    internal Bid Get(int id)
+    {
+      Bid data = _repo.Get(id);
+      if (data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return data;
     }
 
-    internal object Get(int id)
+    internal Bid Create(Bid newBid)
     {
-      throw new NotImplementedException();
+      return _repo.Create(newBid);
     }
 
-    internal object Create(Bid newRev)
+    internal string Delete(int id)
     {
-      throw new NotImplementedException();
+      var data = Get(id);
+      _repo.Delete(id);
+      return "Deleted Job";
     }
 
-    internal object Edit(Bid updatedRev)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal object Delete(int id)
-    {
-      throw new NotImplementedException();
-    }
   }
 }
